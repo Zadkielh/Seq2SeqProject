@@ -193,10 +193,6 @@ trainer = Trainer(
 
 trainer.train()
 
-results = trainer.evaluate()
-print("Evaluation results:")
-print(results)
-
 model.save_pretrained('saved_model')
 tokenizer.save_pretrained('saved_tokenizer')
 

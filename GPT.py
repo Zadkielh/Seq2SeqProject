@@ -185,10 +185,6 @@ if __name__ == '__main__':
     metrics_df = pd.DataFrame(metrics_callback.metrics)
     metrics_df.to_csv('gpt_evaluation_metrics.csv', index=False)
 
-    results = trainer.evaluate()
-    print("Evaluation results:")
-    print(results)
-
     model.save_pretrained('gpt_saved_model')
     tokenizer.save_pretrained('gpt_saved_tokenizer')
 

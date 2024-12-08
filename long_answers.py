@@ -112,14 +112,14 @@ if __name__ == '__main__':
         preprocess_function,
         batched=True,
         remove_columns=dataset['train'].column_names,
-        num_proc=8
+        num_proc=4
     )
 
     validation_dataset = validation_dataset.map(
         preprocess_function,
         batched=True,
         remove_columns=dataset['validation'].column_names,
-        num_proc=8
+        num_proc=4
     )
 
     train_dataset = train_dataset.filter(is_non_empty)
@@ -171,10 +171,6 @@ if __name__ == '__main__':
 
     metrics_df = pd.DataFrame(metrics_callback.metrics)
     metrics_df.to_csv('t5_evaluation_metrics.csv', index=False)
-
-    results = trainer.evaluate()
-    print("Evaluation results:")
-    print(results)
 
     model.save_pretrained('t5_saved_model')
     tokenizer.save_pretrained('t5_saved_tokenizer')

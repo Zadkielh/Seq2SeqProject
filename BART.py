@@ -158,10 +158,6 @@ if __name__ == '__main__':
     metrics_df = pd.DataFrame(metrics_callback.metrics)
     metrics_df.to_csv('bart_evaluation_metrics.csv', index=False)
 
-    results = trainer.evaluate()
-    print("Evaluation results:")
-    print(results)
-
     model.save_pretrained('bart_saved_model')
     tokenizer.save_pretrained('bart_saved_tokenizer')
 
@@ -169,7 +165,7 @@ if __name__ == '__main__':
         input_text = "question: " + question
         input_ids = tokenizer.encode(input_text, return_tensors='pt')
         input_ids = input_ids.to(model.device)
-        outputs = model.generate(input_ids, max_new_tokens=20, num_beams=5, early_stopping=True, no_repeat_ngram_size=3, length_penalty=0.8)
+        outputs = model.generate(input_ids, max_new_tokens=150, num_beams=5, early_stopping=True, no_repeat_ngram_size=3, length_penalty=0.8)
         answer = tokenizer.decode(outputs[0], skip_special_tokens=True)
         return answer
 
